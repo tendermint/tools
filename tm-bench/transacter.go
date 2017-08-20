@@ -3,23 +3,25 @@ package main
 import (
 	"encoding/binary"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"math/rand"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
 	"sync"
 	"time"
 
-	"github.com/go-kit/kit/log"
 	"github.com/gorilla/websocket"
 	"github.com/pkg/errors"
 
-	rpctypes "github.com/tendermint/go-rpc/types"
+	rpctypes "github.com/tendermint/tendermint/rpc/lib/types"
+	"github.com/tendermint/tmlibs/log"
 )
 
 const (
-	sendTimeout = 500 * time.Millisecond
+	sendTimeout = 10 * time.Second
 	// see https://github.com/tendermint/go-rpc/blob/develop/server/handlers.go#L313
 	pingPeriod = (30 * 9 / 10) * time.Second
 )
@@ -90,8 +92,8 @@ func (t *transacter) receiveLoop(connIndex int) {
 	for {
 		_, _, err := c.ReadMessage()
 		if err != nil {
-			if websocket.IsUnexpectedCloseError(err, websocket.CloseNormalClosure) {
-				t.logger.Log("err", errors.Wrap(err, "failed to read response"))
+			if !websocket.IsCloseError(err, websocket.CloseNormalClosure) {
+				t.logger.Error("failed to read response", "err", err)
 			}
 			return
 		}
@@ -104,7 +106,18 @@ func (t *transacter) receiveLoop(connIndex int) {
 // sendLoop generates transactions at a given rate.
 func (t *transacter) sendLoop(connIndex int) {
 	c := t.conns[connIndex]
-	logger := log.With(t.logger, "addr", c.RemoteAddr())
+
+	c.SetPingHandler(func(message string) error {
+		err := c.WriteControl(websocket.PongMessage, []byte(message), time.Now().Add(sendTimeout))
+		if err == websocket.ErrCloseSent {
+			return nil
+		} else if e, ok := err.(net.Error); ok && e.Temporary() {
+			return nil
+		}
+		return err
+	})
+
+	logger := t.logger.With("addr", c.RemoteAddr())
 
 	var txNumber = 0
 
@@ -124,16 +137,22 @@ func (t *transacter) sendLoop(connIndex int) {
 			for i := 0; i < t.Rate; i++ {
 				// each transaction embeds connection index and tx number
 				tx := generateTx(connIndex, txNumber)
+				paramsJson, err := json.Marshal(map[string]interface{}{"tx": hex.EncodeToString(tx)})
+				if err != nil {
+					fmt.Printf("failed to encode params: %v\n", err)
+					os.Exit(1)
+				}
+				rawParamsJson := json.RawMessage(paramsJson)
 
 				c.SetWriteDeadline(time.Now().Add(sendTimeout))
-				err := c.WriteJSON(rpctypes.RPCRequest{
+				err = c.WriteJSON(rpctypes.RPCRequest{
 					JSONRPC: "2.0",
 					ID:      "",
 					Method:  "broadcast_tx_async",
-					Params:  []interface{}{hex.EncodeToString(tx)},
+					Params:  &rawParamsJson,
 				})
 				if err != nil {
-					fmt.Printf("%v. Try increasing the connections count and reducing the rate.\n", errors.Wrap(err, "txs send failed"))
+					fmt.Printf("%v. Try reducing the connections count and increasing the rate.\n", errors.Wrap(err, "txs send failed"))
 					os.Exit(1)
 				}
 
@@ -142,12 +161,12 @@ func (t *transacter) sendLoop(connIndex int) {
 
 			timeToSend := time.Now().Sub(startTime)
 			time.Sleep(time.Second - timeToSend)
-			logger.Log("event", fmt.Sprintf("sent %d transactions", t.Rate), "took", timeToSend)
+			logger.Info(fmt.Sprintf("sent %d transactions", t.Rate), "took", timeToSend)
 		case <-pingsTicker.C:
-			// Right now go-rpc server closes the connection in the absence of pings
+			// go-rpc server closes the connection in the absence of pings
 			c.SetWriteDeadline(time.Now().Add(sendTimeout))
 			if err := c.WriteMessage(websocket.PingMessage, []byte{}); err != nil {
-				logger.Log("err", errors.Wrap(err, "failed to write ping message"))
+				logger.Error("failed to write ping message", "err", err)
 			}
 		}
 
@@ -157,7 +176,7 @@ func (t *transacter) sendLoop(connIndex int) {
 			c.SetWriteDeadline(time.Now().Add(sendTimeout))
 			err := c.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
 			if err != nil {
-				logger.Log("err", errors.Wrap(err, "failed to write close message"))
+				logger.Error("failed to write close message", "err", err)
 			}
 
 			return
