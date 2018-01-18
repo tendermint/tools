@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"text/tabwriter"
+	"encoding/json"
 	"time"
 
 	"github.com/go-kit/kit/log/term"
@@ -65,9 +65,10 @@ Examples:
 			return term.FgBgColor{}
 		}
 		logger = log.NewTMLoggerWithColorFn(log.NewSyncWriter(os.Stdout), colorFn)
+
+		fmt.Printf("Running %ds test @ %s\n", duration, flag.Arg(0))
 	}
 
-	fmt.Printf("Running %ds test @ %s\n", duration, flag.Arg(0))
 
 	endpoints := strings.Split(flag.Arg(0), ",")
 
@@ -153,20 +154,29 @@ func startTransacters(endpoints []string, connections int, txsRate int) []*trans
 	return transacters
 }
 
+type Results struct {
+	BlockLatencyMean	float64
+	BlockLatencyMax		int64
+	BlockLatencyStdDev	float64
+	BlockTimeMean		float64
+	BlockTimeMax		int64
+	BlockTimeStdDev		float64
+	TxThroughputMean	float64
+	TxThroughputMax		int64
+	TxThroughputStdDev	float64
+}
+
 func printStatistics(stats *statistics) {
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 5, ' ', 0)
-	fmt.Fprintln(w, "Stats\tAvg\tStdev\tMax\t")
-	fmt.Fprintln(w, fmt.Sprintf("Block latency\t%.2fms\t%.2fms\t%dms\t",
+	result,_ := json.Marshal(Results{
 		stats.BlockLatency.Mean()/1000000.0,
+		stats.BlockLatency.Max()/1000000,
 		stats.BlockLatency.StdDev()/1000000.0,
-		stats.BlockLatency.Max()/1000000))
-	fmt.Fprintln(w, fmt.Sprintf("Blocks/sec\t%.3f\t%.3f\t%d\t",
 		stats.BlockTimeSample.Mean(),
+		stats.BlockTimeSample.Max(),
 		stats.BlockTimeSample.StdDev(),
-		stats.BlockTimeSample.Max()))
-	fmt.Fprintln(w, fmt.Sprintf("Txs/sec\t%.0f\t%.0f\t%d\t",
 		stats.TxThroughputSample.Mean(),
+		stats.TxThroughputSample.Max(),
 		stats.TxThroughputSample.StdDev(),
-		stats.TxThroughputSample.Max()))
-	w.Flush()
+	})
+	fmt.Println(string(result))
 }
