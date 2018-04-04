@@ -14,6 +14,7 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	"github.com/tendermint/tmlibs/log"
 	"github.com/tendermint/tools/tm-monitor/monitor"
+	"text/tabwriter"
 )
 
 var version = "0.2.1"
@@ -29,17 +30,19 @@ type statistics struct {
 func main() {
 	var duration, txsRate, connections int
 	var verbose bool
+	var outputFormat string
 
 	flag.IntVar(&connections, "c", 1, "Connections to keep open per endpoint")
 	flag.IntVar(&duration, "T", 10, "Exit after the specified amount of time in seconds")
 	flag.IntVar(&txsRate, "r", 1000, "Txs per second to send in a connection")
+	flag.StringVar(&outputFormat, "output-format","plain","Output format: plain or json")
 	flag.BoolVar(&verbose, "v", false, "Verbose output")
 
 	flag.Usage = func() {
 		fmt.Println(`Tendermint blockchain benchmarking tool.
 
 Usage:
-	tm-bench [-c 1] [-T 10] [-r 1000] [endpoints]
+	tm-bench [-c 1] [-T 10] [-r 1000] [endpoints] [-output-format <plain|json>]
 
 Examples:
 	tm-bench localhost:46657`)
@@ -55,6 +58,10 @@ Examples:
 	}
 
 	if verbose {
+		if outputFormat == "json" {
+			fmt.Println("Verbose mode not supported with json output.")
+			os.Exit(1)
+		}
 		// Color errors red
 		colorFn := func(keyvals ...interface{}) term.FgBgColor {
 			for i := 1; i < len(keyvals); i += 2 {
@@ -101,6 +108,9 @@ Examples:
 		case l := <-blockLatencyCh:
 			stats.BlockLatency.Update(int64(l))
 		case <-ticker.C:
+			if outputFormat != "json" {
+				fmt.Println(txs)
+			}
 			stats.BlockTimeSample.Update(int64(blocks))
 			stats.TxThroughputSample.Update(int64(txs))
 			blocks = 0
@@ -110,7 +120,7 @@ Examples:
 				t.Stop()
 			}
 
-			printStatistics(stats)
+			printStatistics(stats, outputFormat)
 
 			for _, n := range nodes {
 				n.Stop()
@@ -166,17 +176,35 @@ type Results struct {
 	TxThroughputStdDev	float64
 }
 
-func printStatistics(stats *statistics) {
-	result,_ := json.Marshal(Results{
-		stats.BlockLatency.Mean()/1000000.0,
-		stats.BlockLatency.Max()/1000000,
-		stats.BlockLatency.StdDev()/1000000.0,
-		stats.BlockTimeSample.Mean(),
-		stats.BlockTimeSample.Max(),
-		stats.BlockTimeSample.StdDev(),
-		stats.TxThroughputSample.Mean(),
-		stats.TxThroughputSample.Max(),
-		stats.TxThroughputSample.StdDev(),
-	})
-	fmt.Println(string(result))
+func printStatistics(stats *statistics, outputFormat string) {
+	if outputFormat == "json" {
+		result,_ := json.Marshal(Results{
+			stats.BlockLatency.Mean()/1000000.0,
+			stats.BlockLatency.Max()/1000000.0,
+			stats.BlockLatency.StdDev()/1000000.0,
+			stats.BlockTimeSample.Mean(),
+			stats.BlockTimeSample.Max(),
+			stats.BlockTimeSample.StdDev(),
+			stats.TxThroughputSample.Mean(),
+			stats.TxThroughputSample.Max(),
+			stats.TxThroughputSample.StdDev(),
+		})
+		fmt.Println(string(result))
+	} else {
+		w := tabwriter.NewWriter(os.Stdout, 0, 0, 5, ' ', 0)
+		fmt.Fprintln(w, "Stats\tAvg\tStdev\tMax\t")
+		fmt.Fprintln(w, fmt.Sprintf("Block latency\t%.2fms\t%.2fms\t%dms\t",
+			stats.BlockLatency.Mean()/1000000.0,
+			stats.BlockLatency.StdDev()/1000000.0,
+			stats.BlockLatency.Max()/1000000))
+		fmt.Fprintln(w, fmt.Sprintf("Blocks/sec\t%.3f\t%.3f\t%d\t",
+			stats.BlockTimeSample.Mean(),
+			stats.BlockTimeSample.StdDev(),
+			stats.BlockTimeSample.Max()))
+		fmt.Fprintln(w, fmt.Sprintf("Txs/sec\t%.0f\t%.0f\t%d\t",
+			stats.TxThroughputSample.Mean(),
+			stats.TxThroughputSample.StdDev(),
+			stats.TxThroughputSample.Max()))
+		w.Flush()
+	}
 }
