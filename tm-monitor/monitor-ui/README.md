@@ -23,6 +23,6 @@ In `./src/store/modules/blockchain.js` and `./src/store/modules/validators.js`, 
 
 1. Extract the zip
 2. Enter the folder in your terminal
-3. Run `python -m SimpleHTTPServer 8000`
-4. Visit `localhost:8000` in your browser
+3. Run `python -m SimpleHTTPServer 8080` (python 2) or  `python3 -m http.server 8080` (python 3)
+4. Visit `localhost:8080` in your browser
 5. Done!
