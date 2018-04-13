@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "proposal_id": 1,
+    "entity_id": "john-connor",
+    "body": "Proin et ante diam. Morbi erat turpis, ornare quis ligula faucibus, volutpat varius ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla libero est, auctor ac porttitor vitae, varius eget turpis. Praesent a lectus mauris.",
+    "visible": true,
+    "created_at": 1458176580000
+  },
+  {
+    "id": 10,
+    "proposal_id": 1,
+    "entity_id": "sarah-connor",
+    "body": "Aenean non fermentum sapien, ut fringilla tellus. Donec pharetra pellentesque convallis. Vivamus varius eu libero quis rutrum.",
+    "visible": true,
+    "created_at": 1458178080000
+  },
+  {
+    "id": 7,
+    "proposal_id": 1,
+    "entity_id": "miles-dyson",
+    "body": "Aenean tincidunt odio non odio semper consectetur. Morbi ultricies velit semper ipsum facilisis pharetra. Praesent gravida varius felis, in finibus neque feugiat sed.",
+    "visible": true,
+    "created_at": 1458184680000
+  },
+  {
+    "id": 9,
+    "proposal_id": 1,
+    "entity_id": "kyle-reese",
+    "body": "Fusce sit amet sodales arcu. Etiam a sagittis purus. Vivamus ultrices interdum lectus, nec gravida tortor pretium eget.",
+    "visible": true,
+    "created_at": 1458263280000
+  },
+  {
+    "id": 2,
+    "proposal_id": 1,
+    "entity_id": "agent-janssen",
+    "body": "Nulla consequat sapien tellus, sit amet blandit urna sollicitudin in. Nulla sollicitudin nulla nec ligula elementum, sollicitudin suscipit diam viverra. Nulla in dolor ipsum.",
+    "visible": true,
+    "created_at": 1458267060000
+  },
+  {
+    "id": 3,
+    "proposal_id": 1,
+    "entity_id": "janelle-voight",
+    "body": "Aenean non fermentum sapien, ut fringilla tellus. Donec pharetra pellentesque convallis. Vivamus varius eu libero quis rutrum.",
+    "visible": true,
+    "created_at": 1458361080000
+  },
+  {
+    "id": 6,
+    "proposal_id": 1,
+    "entity_id": "kate-brewster",
+    "body": "Proin et ante diam. Morbi erat turpis, ornare quis ligula faucibus, volutpat varius ex. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla libero est, auctor ac porttitor vitae, varius eget turpis. Praesent a lectus mauris.",
+    "visible": true,
+    "created_at": 1458320580000
+  },
+  {
+    "id": 4,
+    "proposal_id": 1,
+    "entity_id": "dr-silberman",
+    "body": "Aenean tincidunt odio non odio semper consectetur. Morbi ultricies velit semper ipsum facilisis pharetra. Praesent gravida varius felis, in finibus neque feugiat sed.",
+    "visible": true,
+    "created_at": 1458325080000
+  },
+  {
+    "id": 8,
+    "proposal_id": 1,
+    "entity_id": "marcus-wright",
+    "body": "Nulla consequat sapien tellus, sit amet blandit urna sollicitudin in. Nulla sollicitudin nulla nec ligula elementum, sollicitudin suscipit diam viverra. Nulla in dolor ipsum.",
+    "visible": true,
+    "created_at": 1458333840000
+  },
+  {
+    "id": 5,
+    "proposal_id": 1,
+    "entity_id": "serena-korgan",
+    "body": "Fusce sit amet sodales arcu. Etiam a sagittis purus. Vivamus ultrices interdum lectus, nec gravida tortor pretium eget.",
+    "visible": true,
+    "created_at": 1458415260000
+  }
+]

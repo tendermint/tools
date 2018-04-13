@@ -1,0 +1,30 @@
+{
+  "jsonrpc" : "2.0",
+  "error" : "",
+  "id" : "",
+  "result" : {
+     "network" : {
+        "num_validators" : 1,
+        "avg_block_time" : 1012.61094993961,
+        "uptime_data" : {
+           "uptime" : 100,
+           "start_time" : "2017-03-24T09:17:07.677Z"
+        },
+        "num_nodes_monitored" : 1,
+        "avg_block_latency" : 0.396164804423566,
+        "num_nodes_monitored_online" : 1,
+        "height" : 230,
+        "health" : 0,
+        "avg_tx_throughput" : 0
+     },
+     "nodes" : [
+        {
+           "online" : true,
+           "is_validator" : true,
+           "height" : 230,
+           "block_latency" : 0.778743866666667,
+           "name" : "localhost:46657"
+        }
+     ]
+  }
+}

@@ -1,0 +1,506 @@
+[
+  {
+    "id": "9010e20d-c7e6-5146-9bd7-f61e36e33bdd",
+    "proposal_id": 0,
+    "entity_id": "peng-zhong",
+    "value": 1,
+    "updated_at": 1460613236022
+  },
+  {
+    "id": "04b61744-99a3-5d4b-8cea-5b38c63a8db9",
+    "proposal_id": 0,
+    "entity_id": "janelle-voight",
+    "value": 1,
+    "updated_at": 1461390836026
+  },
+  {
+    "id": "91177e91-cbbb-54d5-9dfb-2e5c50b16bf6",
+    "proposal_id": 0,
+    "entity_id": "marcus-wright",
+    "value": 1,
+    "updated_at": 1461304436027
+  },
+  {
+    "id": "5659cea7-7c74-5029-b97d-1601486113e4",
+    "proposal_id": 0,
+    "entity_id": "machine-01",
+    "value": 1,
+    "updated_at": 1461650036029
+  },
+  {
+    "id": "f13ad369-c86f-5df0-a02a-467729838129",
+    "proposal_id": 0,
+    "entity_id": "miles-dyson",
+    "value": 1,
+    "updated_at": 1460181236029
+  },
+  {
+    "id": "1b93d93a-9727-5dae-b0ca-3b10c3025f65",
+    "proposal_id": 0,
+    "entity_id": "machine-05",
+    "value": -1,
+    "updated_at": 1460958836029
+  },
+  {
+    "id": "bcdfa7b7-cbaa-5298-b995-8fbc333af64d",
+    "proposal_id": 0,
+    "entity_id": "ethan-buchman",
+    "value": 1,
+    "updated_at": 1460354036029
+  },
+  {
+    "id": "ec1fe9e6-b1c8-5b02-914c-d3d13f99984f",
+    "proposal_id": 0,
+    "entity_id": "jae-kwon",
+    "value": 1,
+    "updated_at": 1462427636030
+  },
+  {
+    "id": "e2a24286-1278-564d-b27f-1426524e821c",
+    "proposal_id": 0,
+    "entity_id": "machine-04",
+    "value": 1,
+    "updated_at": 1460526836031
+  },
+  {
+    "id": "992d1361-10ef-5b39-9a22-fdf4deb581ea",
+    "proposal_id": 0,
+    "entity_id": "kyle-reese",
+    "value": 1,
+    "updated_at": 1462254836031
+  },
+  {
+    "id": "4e412581-cdb6-5920-b13c-0e3d7956adc3",
+    "proposal_id": 0,
+    "entity_id": "kate-brewster",
+    "value": -1,
+    "updated_at": 1460526836031
+  },
+  {
+    "id": "2a6110a2-4d31-59be-a934-8a9b572919c4",
+    "proposal_id": 0,
+    "entity_id": "t-1000",
+    "value": 1,
+    "updated_at": 1461045236031
+  },
+  {
+    "id": "9553ea3a-00cd-5d6f-b41f-9f61d30c3720",
+    "proposal_id": 0,
+    "entity_id": "dr-silberman",
+    "value": 1,
+    "updated_at": 1460958836031
+  },
+  {
+    "id": "c227d145-6df5-50a3-a7ee-54d91a8842be",
+    "proposal_id": 0,
+    "entity_id": "machine-03",
+    "value": -1,
+    "updated_at": 1462341236032
+  },
+  {
+    "id": "081d652d-1465-58ce-bcfc-f6fe8f38b57d",
+    "proposal_id": 0,
+    "entity_id": "machine-02",
+    "value": 0,
+    "updated_at": 1461822836032
+  },
+  {
+    "id": "649a409f-a092-5eba-a5a4-ff7b661d3f1c",
+    "proposal_id": 0,
+    "entity_id": "t-x",
+    "value": 0,
+    "updated_at": 1460613236032
+  },
+  {
+    "id": "b707adc4-7638-5dd5-9c90-d118b630558a",
+    "proposal_id": 0,
+    "entity_id": "sarah-connor",
+    "value": 0,
+    "updated_at": 1460440436032
+  },
+  {
+    "id": "8d7afc35-bbf3-556b-ad73-555ce156d442",
+    "proposal_id": 0,
+    "entity_id": "john-connor",
+    "value": 0,
+    "updated_at": 1461045236033
+  },
+  {
+    "id": "db3e6cf7-1b5e-5761-99f1-ff4703ba39d9",
+    "proposal_id": 0,
+    "entity_id": "dustin-byington",
+    "value": 0,
+    "updated_at": 1462341236033
+  },
+  {
+    "id": "ca1d3564-b6f2-5422-a39c-19c00f1e177a",
+    "proposal_id": 0,
+    "entity_id": "t-850",
+    "value": 0,
+    "updated_at": 1462341236033
+  },
+  {
+    "id": "6dba0a4b-004a-5a2b-9449-44f5ac063d5c",
+    "proposal_id": 0,
+    "entity_id": "t-800",
+    "value": 0,
+    "updated_at": 1460181236034
+  },
+  {
+    "id": "d27af061-041a-5501-8a1f-d1fa28f1e895",
+    "proposal_id": 0,
+    "entity_id": "agent-janssen",
+    "value": 0,
+    "updated_at": 1461736436035
+  },
+  {
+    "id": "58f02943-7b85-5963-8915-06b62490c021",
+    "proposal_id": 0,
+    "entity_id": "guardian-01",
+    "value": 0,
+    "updated_at": 1461995636036
+  },
+  {
+    "id": "62ba7372-3204-59f8-a60e-0428b32134b6",
+    "proposal_id": 0,
+    "entity_id": "serena-korgan",
+    "value": 0,
+    "updated_at": 1461563636036
+  },
+  {
+    "id": "0fb60f62-a7f7-5795-9550-c635f80f6dc2",
+    "proposal_id": 1,
+    "entity_id": "janelle-voight",
+    "value": 1,
+    "updated_at": 1460786036036
+  },
+  {
+    "id": "8b1b8aee-215d-5d02-8280-5a5de1ab522c",
+    "proposal_id": 1,
+    "entity_id": "john-connor",
+    "value": 1,
+    "updated_at": 1461909236036
+  },
+  {
+    "id": "2b76b54c-81d4-501e-aecf-9442879eb310",
+    "proposal_id": 1,
+    "entity_id": "machine-02",
+    "value": 1,
+    "updated_at": 1460181236037
+  },
+  {
+    "id": "0ed4cd62-5360-5424-b6ec-b67f195f1d1f",
+    "proposal_id": 1,
+    "entity_id": "marcus-wright",
+    "value": 1,
+    "updated_at": 1461563636037
+  },
+  {
+    "id": "e7f81c52-7110-559e-b16c-00905c2858b5",
+    "proposal_id": 1,
+    "entity_id": "kyle-reese",
+    "value": 1,
+    "updated_at": 1461563636037
+  },
+  {
+    "id": "29792a47-56c9-5be1-8130-7d6d1499a98e",
+    "proposal_id": 1,
+    "entity_id": "dustin-byington",
+    "value": 1,
+    "updated_at": 1462686836037
+  },
+  {
+    "id": "6ae950e6-1769-5a8e-ac35-3a2adf6df8bf",
+    "proposal_id": 1,
+    "entity_id": "machine-04",
+    "value": -1,
+    "updated_at": 1461822836037
+  },
+  {
+    "id": "947c0ece-ab2f-5f67-b586-09302e217780",
+    "proposal_id": 1,
+    "entity_id": "jae-kwon",
+    "value": -1,
+    "updated_at": 1460613236037
+  },
+  {
+    "id": "c2def7d2-2393-5f5a-9461-0086d049c541",
+    "proposal_id": 1,
+    "entity_id": "peng-zhong",
+    "value": 1,
+    "updated_at": 1461822836039
+  },
+  {
+    "id": "a7640e31-e944-547e-a583-f8928a56630f",
+    "proposal_id": 1,
+    "entity_id": "guardian-01",
+    "value": -1,
+    "updated_at": 1462514036039
+  },
+  {
+    "id": "e422dc8d-e7a3-5bad-af46-d1f815819e75",
+    "proposal_id": 1,
+    "entity_id": "agent-janssen",
+    "value": -1,
+    "updated_at": 1462427636039
+  },
+  {
+    "id": "195a3d1b-ff30-5dd0-89f5-e77dba40ef38",
+    "proposal_id": 1,
+    "entity_id": "dr-silberman",
+    "value": 1,
+    "updated_at": 1460526836039
+  },
+  {
+    "id": "d2897404-0254-5896-817e-cbc06930b66d",
+    "proposal_id": 1,
+    "entity_id": "t-x",
+    "value": 1,
+    "updated_at": 1462686836039
+  },
+  {
+    "id": "f6aaac00-6aa8-5718-86cf-107cadd72e41",
+    "proposal_id": 1,
+    "entity_id": "ethan-buchman",
+    "value": -1,
+    "updated_at": 1460613236039
+  },
+  {
+    "id": "14050971-ed3d-50e9-9053-d8514a5a1afb",
+    "proposal_id": 1,
+    "entity_id": "machine-05",
+    "value": 0,
+    "updated_at": 1461650036039
+  },
+  {
+    "id": "bf6f701a-f67f-5f15-bc64-0d4fca18388a",
+    "proposal_id": 1,
+    "entity_id": "kate-brewster",
+    "value": 0,
+    "updated_at": 1460699636040
+  },
+  {
+    "id": "c1eec56f-de49-56e0-a0af-2dccdcbf43e8",
+    "proposal_id": 1,
+    "entity_id": "machine-03",
+    "value": 0,
+    "updated_at": 1461563636040
+  },
+  {
+    "id": "7b5eb218-269c-5245-bd92-e6de3bdf51b5",
+    "proposal_id": 1,
+    "entity_id": "miles-dyson",
+    "value": 0,
+    "updated_at": 1460613236040
+  },
+  {
+    "id": "3917ad64-d860-5d92-b7ff-05d8b225f961",
+    "proposal_id": 1,
+    "entity_id": "machine-01",
+    "value": 0,
+    "updated_at": 1462514036040
+  },
+  {
+    "id": "91454e8c-ebf1-59a1-833e-e5841b399321",
+    "proposal_id": 1,
+    "entity_id": "t-800",
+    "value": 0,
+    "updated_at": 1460181236040
+  },
+  {
+    "id": "6074e05f-2ab3-5f3e-8b0e-fab54b8c2b82",
+    "proposal_id": 1,
+    "entity_id": "sarah-connor",
+    "value": 0,
+    "updated_at": 1462082036040
+  },
+  {
+    "id": "4bbab69c-17f1-5d30-bb95-00fc24dcac8c",
+    "proposal_id": 1,
+    "entity_id": "t-850",
+    "value": 0,
+    "updated_at": 1462082036041
+  },
+  {
+    "id": "4ff7e8b2-2564-5d56-bca0-a5905a06c949",
+    "proposal_id": 1,
+    "entity_id": "serena-korgan",
+    "value": 0,
+    "updated_at": 1460354036041
+  },
+  {
+    "id": "b9ffd205-7c95-570d-a0eb-86ca64ab9f2b",
+    "proposal_id": 1,
+    "entity_id": "t-1000",
+    "value": 0,
+    "updated_at": 1461822836041
+  },
+  {
+    "id": "7f712a4e-a340-594a-b14d-eab266b36e83",
+    "proposal_id": 832,
+    "entity_id": "john-connor",
+    "value": 1,
+    "updated_at": 1460526836041
+  },
+  {
+    "id": "a04142fd-a8c0-500b-a2d0-36f82eb545ec",
+    "proposal_id": 832,
+    "entity_id": "machine-03",
+    "value": 1,
+    "updated_at": 1460526836041
+  },
+  {
+    "id": "f6c0bac8-b8bf-514b-8aff-228f2535a476",
+    "proposal_id": 832,
+    "entity_id": "kate-brewster",
+    "value": 1,
+    "updated_at": 1460181236041
+  },
+  {
+    "id": "4bfcb3b7-254c-5bc1-bafb-e7bfe8885852",
+    "proposal_id": 832,
+    "entity_id": "sarah-connor",
+    "value": 1,
+    "updated_at": 1460613236041
+  },
+  {
+    "id": "b212a758-a477-545f-9559-e0e721e39037",
+    "proposal_id": 832,
+    "entity_id": "machine-01",
+    "value": 1,
+    "updated_at": 1461131636042
+  },
+  {
+    "id": "9dfa4e82-7ff2-5982-b642-50817c5b6c78",
+    "proposal_id": 832,
+    "entity_id": "guardian-01",
+    "value": 1,
+    "updated_at": 1460181236042
+  },
+  {
+    "id": "06a6d55d-7992-5f8f-adec-0d86b26a2784",
+    "proposal_id": 832,
+    "entity_id": "machine-05",
+    "value": 1,
+    "updated_at": 1461995636042
+  },
+  {
+    "id": "88c8d83d-5138-5130-be3c-0a5c2d2763ac",
+    "proposal_id": 832,
+    "entity_id": "peng-zhong",
+    "value": 1,
+    "updated_at": 1462514036042
+  },
+  {
+    "id": "fb741505-8b4a-5b87-8c1b-5b84e08e5057",
+    "proposal_id": 832,
+    "entity_id": "t-x",
+    "value": 1,
+    "updated_at": 1462427636042
+  },
+  {
+    "id": "2c8fa51a-1de7-58cf-af88-fe1b8aecf1b3",
+    "proposal_id": 832,
+    "entity_id": "ethan-buchman",
+    "value": 1,
+    "updated_at": 1460354036042
+  },
+  {
+    "id": "f9983657-d537-554c-a5ab-796c769362f0",
+    "proposal_id": 832,
+    "entity_id": "machine-04",
+    "value": 1,
+    "updated_at": 1460440436042
+  },
+  {
+    "id": "4eca5796-da1e-5204-86b8-0ecba6a75ccf",
+    "proposal_id": 832,
+    "entity_id": "dr-silberman",
+    "value": 1,
+    "updated_at": 1460526836042
+  },
+  {
+    "id": "e21714a3-c278-57a4-a1ec-54e24a2e2d42",
+    "proposal_id": 832,
+    "entity_id": "t-1000",
+    "value": -1,
+    "updated_at": 1460181236042
+  },
+  {
+    "id": "4d27d9f6-7d73-5770-988e-2d545b7b6dc2",
+    "proposal_id": 832,
+    "entity_id": "marcus-wright",
+    "value": -1,
+    "updated_at": 1461304436042
+  },
+  {
+    "id": "b26ed504-0a90-5f57-a5da-b37754e4dbff",
+    "proposal_id": 832,
+    "entity_id": "jae-kwon",
+    "value": -1,
+    "updated_at": 1462686836042
+  },
+  {
+    "id": "39e94f21-bf37-5f4f-bb05-5f1ad3490fc2",
+    "proposal_id": 832,
+    "entity_id": "machine-02",
+    "value": 0,
+    "updated_at": 1460526836043
+  },
+  {
+    "id": "ee662ed9-1489-5ed4-97ef-f56f8b1295d0",
+    "proposal_id": 832,
+    "entity_id": "t-800",
+    "value": 0,
+    "updated_at": 1461563636043
+  },
+  {
+    "id": "fd00e96c-f9ed-5144-a745-33bed797990c",
+    "proposal_id": 832,
+    "entity_id": "kyle-reese",
+    "value": 0,
+    "updated_at": 1461131636043
+  },
+  {
+    "id": "63b84273-21c6-5e1f-b7e5-aab094d6dbba",
+    "proposal_id": 832,
+    "entity_id": "janelle-voight",
+    "value": 0,
+    "updated_at": 1461650036043
+  },
+  {
+    "id": "152623df-424b-5ab0-8972-280b8b95d075",
+    "proposal_id": 832,
+    "entity_id": "dustin-byington",
+    "value": 0,
+    "updated_at": 1462514036043
+  },
+  {
+    "id": "9067c08d-53ec-5253-a691-5c29ce557641",
+    "proposal_id": 832,
+    "entity_id": "serena-korgan",
+    "value": 0,
+    "updated_at": 1462082036044
+  },
+  {
+    "id": "43ed082b-e1f8-5a0a-b8b9-5421aa096cf1",
+    "proposal_id": 832,
+    "entity_id": "t-850",
+    "value": 0,
+    "updated_at": 1461477236044
+  },
+  {
+    "id": "debafa53-5baa-533e-a1c9-c90f136a93de",
+    "proposal_id": 832,
+    "entity_id": "miles-dyson",
+    "value": 0,
+    "updated_at": 1461563636044
+  },
+  {
+    "id": "4381ecbf-d5c0-503d-b6a7-727dc7a7f721",
+    "proposal_id": 832,
+    "entity_id": "agent-janssen",
+    "value": 0,
+    "updated_at": 1461909236044
+  }
+]
