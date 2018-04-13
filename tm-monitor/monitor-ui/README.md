@@ -18,3 +18,11 @@ yarn build
 ## Change Watched Node
 
 In `./src/store/modules/blockchain.js` and `./src/store/modules/validators.js`, change the `let url = ` line to the Tendermint RPC of your choice.
+
+## Run the built version locally
+
+1. Extract the zip
+2. Enter the folder in your terminal
+3. Run `python -m SimpleHTTPServer 8000`
+4. Visit `localhost:8000` in your browser
+5. Done!
