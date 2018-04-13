@@ -13,21 +13,7 @@ const routes = [
     name: 'validator',
     path: '/validators/:validator',
     component: r('Validator')
-  },
-  { path: '/delegators', component: r('Delegators') },
-  {
-    name: 'delegator',
-    path: '/delegators/:delegator',
-    component: r('Delegator')
-  },
-  { path: '/proposals', component: r('Proposals') },
-  { path: '/proposals/new', component: r('ProposalsNew') },
-  { path: '/proposals/new/plain-text', component: r('ProposalsText') },
-  { path: '/proposals/:proposal', name: 'proposal', component: r('Proposal') },
-
-  // user
-  { path: '/profile', component: r('Profile') },
-  { path: '/settings', component: r('Settings') }
+  }
 ]
 
 export default new Router({

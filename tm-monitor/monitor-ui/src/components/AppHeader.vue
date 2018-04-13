@@ -8,7 +8,6 @@ nav#app-header: .container
   router-link.header-item.header-item-logo(to="/")
     img(src="../assets/images/cosmos.png")
   app-menu(v-if="config.activeMenu === 'app' || config.desktop")
-  // app-menu-user(v-if="config.activeMenu === 'user' || config.desktop")
 
   template(v-if="!config.desktop")
     .header-item(v-if="config.activeMenu === 'user'" @click="close")
@@ -20,12 +19,10 @@ nav#app-header: .container
 import { mapGetters } from 'vuex'
 import noScroll from 'no-scroll'
 import AppMenu from './AppMenu'
-import AppMenuUser from './AppMenuUser'
 export default {
   name: 'app-header',
   components: {
-    AppMenu,
-    AppMenuUser
+    AppMenu
   },
   computed: {
     ...mapGetters(['config'])

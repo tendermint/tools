@@ -1,11 +1,3 @@
-export const notifications = state => state.notifications
 export const blockchain = state => state.blockchain
 export const validators = state => state.validators.validators
-export const current = state => state.current
-export const messages = state => state.messages.messages
-export const newValidator = state => state.newValidator.validator
-export const proposalText = state => state.proposalText.proposal
-export const proposals = state => state.proposals
-export const votes = state => state.votes.votes
-export const delegators = state => state.delegators
 export const config = state => state.config

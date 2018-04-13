@@ -1,12 +1,9 @@
 <template lang="pug">
 menu.app-menu
-  // part(title='Governance')
-    list-item(to="/proposals" exact @click.native="close" title="Proposals")
   part(title='Network Monitor')
     list-item(to="/" exact @click.native="close" title="Blockchain")
     list-item(to="/validators" exact @click.native="close" :title="`Peer Nodes (${validators.length})`" v-bind:class="{ 'active': isValidatorPage }")
     list-item(to="/search" exact @click.native="close" title="Search")
-    // list-item(to="/delegators" exact @click.native="close" title="Delegators")
   part(title='Learn More')
     list-item(type="anchor" href="https://riot.im/app/#/room/#cosmos_validators:matrix.org" @click.native="close" title="Validator Chat" target="_blank")
     list-item(type="anchor" href="https://cosmos.network" @click.native="close" title="Cosmos Website" target="_blank")

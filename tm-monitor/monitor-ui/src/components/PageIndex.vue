@@ -1,12 +1,5 @@
 <template lang="pug">
 page(title='Blockchain')
-  // blockchain-select-modal
-  // tool-bar
-    router-link(to="/search" exact): i.material-icons search
-    a(@click='toggleBlockchainSelect')
-      i.material-icons(v-if='!config.blockchainSelect') filter_list
-      i.material-icons(v-else='') close
-
   part(title='Blockchain')
     list-item(dt='Network' :dd='bc.status.node_info.network')
     list-item(dt='Tendermint Version' :dd='bc.status.node_info.version')
@@ -22,29 +15,21 @@ page(title='Blockchain')
     // list-item(label='Node IP' :input='bc.connectedIp')
     list-item(dt='Node IP' dd='206.189.22.179')
     list-item(dt='Node Moniker' :dd='bc.status.node_info.moniker')
-
-  // part(title='Nodes')
-    // list-item(dt='Current Rate' :dd="currentRate + ' bytes/s'")
-    // list-item(dt='Average Rate' :dd="averageRate + ' bytes/s'")
 </template>
 
 <script>
 import moment from 'moment'
 import num from '../scripts/num'
 import { mapGetters } from 'vuex'
-import BlockchainSelectModal from './BlockchainSelectModal'
 import ListItem from './NiListItem'
 import Page from './NiPage'
 import Part from './NiPart'
-import ToolBar from './NiToolBar'
 export default {
   name: 'page-index',
   components: {
-    BlockchainSelectModal,
     ListItem,
     Page,
-    Part,
-    ToolBar
+    Part
   },
   computed: {
     ...mapGetters(['blockchain', 'config', 'validators']),
@@ -64,9 +49,6 @@ export default {
     toggleBlockchainSelect () {
       this.$store.commit('SET_CONFIG_BLOCKCHAIN_SELECT', !this.config.blockchainSelect)
     }
-  },
-  mounted () {
-    console.log(this.blockchain)
   }
 }
 </script>
