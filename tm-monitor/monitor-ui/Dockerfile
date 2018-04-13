@@ -6,12 +6,13 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package.json /usr/src/app/
-RUN npm install
+COPY yarn.lock /usr/src/app/
+RUN yarn
 
 # Bundle app source
 COPY . /usr/src/app
 
-RUN npm run build
+RUN yarn build
 
 EXPOSE 8080
-CMD [ "npm", "run", "dev" ]
+CMD [ "yarn", "start" ]
