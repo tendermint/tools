@@ -33,7 +33,7 @@ const (
 
 // Common statistics for network of nodes
 type Network struct {
-	Height uint64 `json:"height"`
+	Height int64 `json:"height"`
 
 	AvgBlockTime      float64 `json:"avg_block_time" wire:"unsafe"` // ms (avg over last minute)
 	blockTimeMeter    metrics.Meter
@@ -73,11 +73,11 @@ func (n *Network) NewBlock(b tmtypes.Header) {
 	n.mu.Lock()
 	defer n.mu.Unlock()
 
-	if n.Height >= uint64(b.Height) {
+	if n.Height >= b.Height {
 		return
 	}
 
-	n.Height = uint64(b.Height)
+	n.Height = b.Height
 
 	n.blockTimeMeter.Mark(1)
 	if n.blockTimeMeter.Rate1() > 0.0 {
@@ -164,6 +164,15 @@ func (n *Network) updateHealth() {
 	}
 }
 
+func (n *Network) UpdateNumValidatorsForHeight(num int, height int64) {
+	n.mu.Lock()
+	defer n.mu.Unlock()
+
+	if n.Height <= height {
+		n.NumValidators = num
+	}
+}
+
 func (n *Network) GetHealthString() string {
 	switch n.Health {
 	case FullHealth:
@@ -179,6 +188,8 @@ func (n *Network) GetHealthString() string {
 
 // Uptime returns network's uptime in percentages.
 func (n *Network) Uptime() float64 {
+	n.mu.Lock()
+	defer n.mu.Unlock()
 	return n.UptimeData.Uptime
 }
 
