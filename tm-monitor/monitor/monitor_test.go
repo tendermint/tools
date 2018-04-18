@@ -46,13 +46,6 @@ func TestMonitorRecalculatesNetworkUptime(t *testing.T) {
 	assert.True(t, m.Network.Uptime() < 100.0, "Uptime should be less than 100%")
 }
 
-func TestStartMonitor(t *testing.T)  {
-	m := startMonitor(t)
-	defer m.Stop()
-
-	time.Sleep(200 * time.Minute)
-}
-
 func startMonitor(t *testing.T) *monitor.Monitor {
 	m := monitor.NewMonitor(
 		monitor.SetNumValidatorsUpdateInterval(200*time.Millisecond),

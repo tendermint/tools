@@ -252,7 +252,6 @@ type eventMeter interface {
 
 // UnmarshalEvent unmarshals a json event
 func UnmarshalEvent(b json.RawMessage) (string, events.EventData, error) {
-	//fmt.Println("------------------UnmarshalEvent" + string(b))
 	event := new(ctypes.ResultEvent)
 	if err := cdc.UnmarshalJSON(b, &event); err != nil {
 		return "", nil, err
