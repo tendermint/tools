@@ -6,10 +6,10 @@ page(title='Blockchain')
     list-item(dt='Peer Nodes' :dd='validators.length')
 
   part(title='Current Block')
-    list-item(dt='Block Height' :dd='num.prettyInt(bc.status.latest_block_height)'
-      :to="{ name: 'block', params: { block: bc.status.latest_block_height} }")
+    list-item(dt='Block Height' :dd='num.prettyInt(bc.status.sync_info.latest_block_height)'
+      :to="{ name: 'block', params: { block: bc.status.sync_info.latest_block_height} }")
     list-item(dt='Latest Block Time' :dd='readableDate(bc.status.latest_block_time)')
-    list-item(dt='Latest Block Hash' :dd='bc.status.latest_block_hash')
+    list-item(dt='Latest Block Hash' :dd='bc.status.sync_info.latest_block_hash')
 
   part(title='Connected Node')
     // list-item(label='Node IP' :input='bc.connectedIp')
