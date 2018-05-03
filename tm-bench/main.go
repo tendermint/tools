@@ -1,20 +1,21 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
 	"strings"
-	"encoding/json"
 	"time"
 
 	"github.com/go-kit/kit/log/term"
 	metrics "github.com/rcrowley/go-metrics"
 
+	"text/tabwriter"
+
 	tmtypes "github.com/tendermint/tendermint/types"
 	"github.com/tendermint/tmlibs/log"
 	"github.com/tendermint/tools/tm-monitor/monitor"
-	"text/tabwriter"
 )
 
 var version = "0.2.1"
@@ -35,7 +36,7 @@ func main() {
 	flag.IntVar(&connections, "c", 1, "Connections to keep open per endpoint")
 	flag.IntVar(&duration, "T", 10, "Exit after the specified amount of time in seconds")
 	flag.IntVar(&txsRate, "r", 1000, "Txs per second to send in a connection")
-	flag.StringVar(&outputFormat, "output-format","plain","Output format: plain or json")
+	flag.StringVar(&outputFormat, "output-format", "plain", "Output format: plain or json")
 	flag.BoolVar(&verbose, "v", false, "Verbose output")
 
 	flag.Usage = func() {
@@ -76,7 +77,6 @@ Examples:
 		fmt.Printf("Running %ds test @ %s\n", duration, flag.Arg(0))
 	}
 
-
 	endpoints := strings.Split(flag.Arg(0), ",")
 
 	blockCh := make(chan tmtypes.Header, 100)
@@ -108,9 +108,6 @@ Examples:
 		case l := <-blockLatencyCh:
 			stats.BlockLatency.Update(int64(l))
 		case <-ticker.C:
-			if outputFormat != "json" {
-				fmt.Println(txs)
-			}
 			stats.BlockTimeSample.Update(int64(blocks))
 			stats.TxThroughputSample.Update(int64(txs))
 			blocks = 0
@@ -165,23 +162,23 @@ func startTransacters(endpoints []string, connections int, txsRate int) []*trans
 }
 
 type Results struct {
-	BlockLatencyMean	float64
-	BlockLatencyMax		int64
-	BlockLatencyStdDev	float64
-	BlockTimeMean		float64
-	BlockTimeMax		int64
-	BlockTimeStdDev		float64
-	TxThroughputMean	float64
-	TxThroughputMax		int64
-	TxThroughputStdDev	float64
+	BlockLatencyMean   float64
+	BlockLatencyMax    int64
+	BlockLatencyStdDev float64
+	BlockTimeMean      float64
+	BlockTimeMax       int64
+	BlockTimeStdDev    float64
+	TxThroughputMean   float64
+	TxThroughputMax    int64
+	TxThroughputStdDev float64
 }
 
 func printStatistics(stats *statistics, outputFormat string) {
 	if outputFormat == "json" {
-		result,_ := json.Marshal(Results{
-			stats.BlockLatency.Mean()/1000000.0,
-			stats.BlockLatency.Max()/1000000.0,
-			stats.BlockLatency.StdDev()/1000000.0,
+		result, _ := json.Marshal(Results{
+			stats.BlockLatency.Mean() / 1000000.0,
+			stats.BlockLatency.Max() / 1000000.0,
+			stats.BlockLatency.StdDev() / 1000000.0,
 			stats.BlockTimeSample.Mean(),
 			stats.BlockTimeSample.Max(),
 			stats.BlockTimeSample.StdDev(),
