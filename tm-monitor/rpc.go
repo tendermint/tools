@@ -6,7 +6,7 @@ import (
 
 	rpc "github.com/tendermint/tendermint/rpc/lib/server"
 	"github.com/tendermint/tmlibs/log"
-	monitor "github.com/tendermint/tools/tm-monitor/monitor"
+	monitor "github.com/kidinamoto01/tools/tm-monitor/monitor"
 )
 
 func startRPC(listenAddr string, m *monitor.Monitor, logger log.Logger) {
@@ -37,8 +37,23 @@ func routes(m *monitor.Monitor) map[string]*rpc.RPCFunc {
 
 // RPCStatus returns common statistics for the network and statistics per node.
 func RPCStatus(m *monitor.Monitor) interface{} {
-	return func() (networkAndNodes, error) {
-		return networkAndNodes{m.Network, m.Nodes}, nil
+	return func() (monitor.NetworkAndNodes, error) {
+
+		netStat := monitor.NetworkStatus{m.Network.NumValidators,m.Network.NumNodesMonitored,m.Network.NumNodesMonitoredOnline}
+
+
+		nodeStatus := []*monitor.NodeStatus{}
+
+		for n := range m.Nodes {
+
+			node := monitor.NodeStatus{m.Nodes[n].Name,m.Nodes[n].IsValidator,m.Nodes[n].Online,m.Nodes[n].Height}
+
+			nodeStatus = append(nodeStatus, &node)
+
+			}
+
+
+		return monitor.NetworkAndNodes{&netStat,nodeStatus}, nil
 	}
 }
 
@@ -116,9 +131,3 @@ func RPCUnmonitor(m *monitor.Monitor) interface{} {
 // 	return val.EventMeter().GetMetric(eventID)
 // }
 
-//--> types
-
-type networkAndNodes struct {
-	Network *monitor.Network `json:"network"`
-	Nodes   []*monitor.Node  `json:"nodes"`
-}

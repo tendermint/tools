@@ -12,7 +12,7 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	"github.com/tendermint/tmlibs/events"
 	"github.com/tendermint/tmlibs/log"
-	em "github.com/tendermint/tools/tm-monitor/eventmeter"
+	em "github.com/kidinamoto01/tools/tm-monitor/eventmeter"
 )
 
 const maxRestarts = 25

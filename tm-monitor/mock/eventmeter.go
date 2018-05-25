@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"github.com/tendermint/tmlibs/log"
-	em "github.com/tendermint/tools/tm-monitor/eventmeter"
+	em "github.com/kidinamoto01/tools/tm-monitor/eventmeter"
 	"github.com/tendermint/go-amino"
 )
 

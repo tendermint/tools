@@ -8,7 +8,7 @@ import (
 
 	cmn "github.com/tendermint/tmlibs/common"
 	"github.com/tendermint/tmlibs/log"
-	monitor "github.com/tendermint/tools/tm-monitor/monitor"
+	monitor "github.com/kidinamoto01/tools/tm-monitor/monitor"
 )
 
 var version = "0.4.0"

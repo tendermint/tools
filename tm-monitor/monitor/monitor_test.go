@@ -10,8 +10,8 @@ import (
 	crypto "github.com/tendermint/go-crypto"
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 	tmtypes "github.com/tendermint/tendermint/types"
-	mock "github.com/tendermint/tools/tm-monitor/mock"
-	monitor "github.com/tendermint/tools/tm-monitor/monitor"
+	mock "github.com/kidinamoto01/tools/tm-monitor/mock"
+	monitor "github.com/kidinamoto01/tools/tm-monitor/monitor"
 	"github.com/tendermint/go-amino"
 )
 
