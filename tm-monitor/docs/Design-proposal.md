@@ -39,7 +39,7 @@ The safety of a validator is under pressure if :
 
 The architecture of new version of monitor will be like this:
 
-![WechatIMG114](https://github.com/bianjieai/tendermint-tools/raw/bianjie/tm-monitor/tm-monitor/docs/pics/WechatIMG114.jpeg)
+![architecture](https://github.com/bianjieai/tendermint-tools/raw/bianjie/tm-monitor/tm-monitor/docs/pics/architecture.png)
 
 The data will be stored in Mongo to facilitate better querying.
 
