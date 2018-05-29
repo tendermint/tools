@@ -131,6 +131,18 @@ func (m *Monitor) NodeByName(name string) (index int, node *Node) {
 	return -1, nil
 }
 
+// UpdateNodeStatus updates the status of the node which has the corresponding name.
+func (m *Monitor) UpdateNodeStatus(name string, status bool) {
+
+	_, node := m.NodeByName(name)
+	if nil != node {
+		m.mtx.Lock()
+		node.Online = status
+		m.mtx.Unlock()
+	}
+
+}
+
 // Start starts the monitor's routines: recalculating network uptime and
 // updating number of validators.
 func (m *Monitor) Start() error {
@@ -160,14 +172,17 @@ func (m *Monitor) listen(nodeName string, blockCh <-chan tmtypes.Header, blockLa
 		case b := <-blockCh:
 			m.Network.NewBlock(b)
 			m.Network.NodeIsOnline(nodeName)
+			m.UpdateNodeStatus(nodeName, true)
 		case l := <-blockLatencyCh:
 			m.Network.NewBlockLatency(l)
 			m.Network.NodeIsOnline(nodeName)
+			m.UpdateNodeStatus(nodeName, true)
 		case disconnected := <-disconnectCh:
 			if disconnected {
 				m.Network.NodeIsDown(nodeName)
 			} else {
 				m.Network.NodeIsOnline(nodeName)
+				m.UpdateNodeStatus(nodeName, true)
 			}
 		case <-time.After(nodeLivenessTimeout):
 			logger.Info("event", fmt.Sprintf("node was not responding for %v", nodeLivenessTimeout))
