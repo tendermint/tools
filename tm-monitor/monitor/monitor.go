@@ -131,14 +131,17 @@ func (m *Monitor) NodeByName(name string) (index int, node *Node) {
 	return -1, nil
 }
 
-// UpdateNodeStatus updates the status of the node which has the corresponding name.
-func (m *Monitor) UpdateNodeStatus(name string, status bool) {
+// NodeIsOnline is called when connection to the node is restored.
+// Must be safe to call multiple times.
+func (m *Monitor) NodeIsOnline(name string) {
 
 	_, node := m.NodeByName(name)
 	if nil != node {
-		m.mtx.Lock()
-		node.Online = status
-		m.mtx.Unlock()
+		if online, ok := m.Network.nodeStatusMap[name]; ok && online {
+			m.mtx.Lock()
+			node.Online = online
+			m.mtx.Unlock()
+		}
 	}
 
 }
@@ -172,17 +175,17 @@ func (m *Monitor) listen(nodeName string, blockCh <-chan tmtypes.Header, blockLa
 		case b := <-blockCh:
 			m.Network.NewBlock(b)
 			m.Network.NodeIsOnline(nodeName)
-			m.UpdateNodeStatus(nodeName, true)
+			m.NodeIsOnline(nodeName)
 		case l := <-blockLatencyCh:
 			m.Network.NewBlockLatency(l)
 			m.Network.NodeIsOnline(nodeName)
-			m.UpdateNodeStatus(nodeName, true)
+			m.NodeIsOnline(nodeName)
 		case disconnected := <-disconnectCh:
 			if disconnected {
 				m.Network.NodeIsDown(nodeName)
 			} else {
 				m.Network.NodeIsOnline(nodeName)
-				m.UpdateNodeStatus(nodeName, true)
+				m.NodeIsOnline(nodeName)
 			}
 		case <-time.After(nodeLivenessTimeout):
 			logger.Info("event", fmt.Sprintf("node was not responding for %v", nodeLivenessTimeout))
