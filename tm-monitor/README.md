@@ -13,7 +13,7 @@ Assuming your application is running in another container with the name
 `app`:
 
     docker run -it --rm -v "/tmp:/tendermint" tendermint/tendermint init
-    docker run -it --rm -v "/tmp:/tendermint" -p "26657:26657" --name=tm --link=app tendermint/tendermint node --proxy_app=tcp://app:46658
+    docker run -it --rm -v "/tmp:/tendermint" -p "26657:26657" --name=tm --link=app tendermint/tendermint node --proxy_app=tcp://app:26658
 
     docker run -it --rm -p "26670:26670" --link=tm tendermint/monitor tm:26657
 
