@@ -249,3 +249,31 @@ func (m *Monitor) updateNumValidatorLoop() {
 		}
 	}
 }
+
+
+//--> types
+
+//type NetworkAndNodes struct {
+//	Network *Network `json:"network"`
+//	Nodes   []*Node  `json:"nodes"`
+//}
+
+type NetworkAndNodes struct {
+	NetStatus *NetworkStatus `json:"network_status"`
+	NodeStatus []*NodeStatus `json:"node_status"`
+}
+
+type NetworkStatus struct{
+
+	NumValidators           int `json:"num_validators"`
+	NumNodesMonitored       int `json:"num_nodes_monitored"`
+	NumNodesMonitoredOnline int `json:"num_nodes_monitored_online"`
+}
+
+type NodeStatus struct{
+
+	Name         string  `json:"name"`
+	IsValidator bool          `json:"is_validator"` // validator or non-validator?
+	Online       bool    `json:"online"`
+	Height       int64   `json:"height"`
+}
