@@ -34,10 +34,10 @@ type transacter struct {
 	Connections       int
 	BroadcastTxMethod string
 
-	conns      []*websocket.Conn
-	connStatus []error
-	wg         sync.WaitGroup
-	stopped    bool
+	conns       []*websocket.Conn
+	connsBroken []bool
+	wg          sync.WaitGroup
+	stopped     bool
 
 	logger log.Logger
 }
@@ -50,7 +50,7 @@ func newTransacter(target string, connections, rate int, size int, broadcastTxMe
 		Connections:       connections,
 		BroadcastTxMethod: broadcastTxMethod,
 		conns:             make([]*websocket.Conn, connections),
-		connStatus:        make([]error, connections),
+		connsBroken:       make([]bool, connections),
 		logger:            log.NewNopLogger(),
 	}
 }
@@ -110,7 +110,7 @@ func (t *transacter) receiveLoop(connIndex int) {
 			}
 			return
 		}
-		if t.stopped || t.connStatus[connIndex] != nil {
+		if t.stopped || t.connsBroken[connIndex] {
 			return
 		}
 	}
@@ -177,7 +177,7 @@ func (t *transacter) sendLoop(connIndex int) {
 				if err != nil {
 					err = errors.Wrap(err,
 						fmt.Sprintf("txs send failed on connection #%d", connIndex))
-					t.connStatus[connIndex] = err
+					t.connsBroken[connIndex] = true
 					logger.Error(err.Error())
 					return
 				}
@@ -209,7 +209,7 @@ func (t *transacter) sendLoop(connIndex int) {
 				err = errors.Wrap(err,
 					fmt.Sprintf("failed to write ping message on conn #%d", connIndex))
 				logger.Error(err.Error())
-				t.connStatus[connIndex] = err
+				t.connsBroken[connIndex] = true
 			}
 		}
 
@@ -222,7 +222,7 @@ func (t *transacter) sendLoop(connIndex int) {
 				err = errors.Wrap(err,
 					fmt.Sprintf("failed to write close message on conn #%d", connIndex))
 				logger.Error(err.Error())
-				t.connStatus[connIndex] = err
+				t.connsBroken[connIndex] = true
 			}
 
 			return

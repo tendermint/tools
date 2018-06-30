@@ -110,7 +110,7 @@ Examples:
 	case <-time.After(endTime):
 		for i, t := range transacters {
 			t.Stop()
-			numCrashes := countCrashes(t.connStatus)
+			numCrashes := countCrashes(t.connsBroken)
 			if numCrashes != 0 {
 				fmt.Printf("%d connections crashed on transacter #%d\n", numCrashes, i)
 			}
@@ -146,10 +146,10 @@ func latestBlockHeight(client tmrpc.Client) int64 {
 	return status.SyncInfo.LatestBlockHeight
 }
 
-func countCrashes(errs []error) int {
+func countCrashes(crashes []bool) int {
 	count := 0
-	for i := 0; i < len(errs); i++ {
-		if errs[i] != nil {
+	for i := 0; i < len(crashes); i++ {
+		if crashes[i] {
 			count++
 		}
 	}
