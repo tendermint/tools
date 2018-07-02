@@ -198,7 +198,7 @@ func (t *transacter) sendLoop(connIndex int) {
 			logger.Info(fmt.Sprintf("sent %d transactions", numTxSent), "took", timeToSend)
 			if timeToSend < 1*time.Second {
 				sleepTime := time.Second - timeToSend
-				logger.Info(fmt.Sprintf("connection #%d is sleeping for %f seconds", connIndex, sleepTime.Seconds()))
+				logger.Debug(fmt.Sprintf("connection #%d is sleeping for %f seconds", connIndex, sleepTime.Seconds()))
 				time.Sleep(sleepTime)
 			}
 
