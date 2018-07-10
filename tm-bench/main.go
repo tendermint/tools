@@ -30,16 +30,16 @@ func main() {
 	var duration, txsRate, connections, txSize int
 	var verbose bool
 	var outputFormat, broadcastTxMethod string
+	flagSet := flag.NewFlagSet("tm-bench", flag.ExitOnError)
+	flagSet.IntVar(&connections, "c", 1, "Connections to keep open per endpoint")
+	flagSet.IntVar(&duration, "T", 10, "Exit after the specified amount of time in seconds")
+	flagSet.IntVar(&txsRate, "r", 1000, "Txs per second to send in a connection")
+	flagSet.IntVar(&txSize, "s", 250, "The size of a transaction in bytes.")
+	flagSet.StringVar(&outputFormat, "output-format", "plain", "Output format: plain or json")
+	flagSet.StringVar(&broadcastTxMethod, "broadcast-tx-method", "async", "Broadcast method: async (no guarantees; fastest), sync (ensures tx is checked) or commit (ensures tx is checked and committed; slowest)")
+	flagSet.BoolVar(&verbose, "v", false, "Verbose output")
 
-	flag.IntVar(&connections, "c", 1, "Connections to keep open per endpoint")
-	flag.IntVar(&duration, "T", 10, "Exit after the specified amount of time in seconds")
-	flag.IntVar(&txsRate, "r", 1000, "Txs per second to send in a connection")
-	flag.IntVar(&txSize, "s", 250, "The size of a transaction in bytes.")
-	flag.StringVar(&outputFormat, "output-format", "plain", "Output format: plain or json")
-	flag.StringVar(&broadcastTxMethod, "broadcast-tx-method", "async", "Broadcast method: async (no guarantees; fastest), sync (ensures tx is checked) or commit (ensures tx is checked and committed; slowest)")
-	flag.BoolVar(&verbose, "v", false, "Verbose output")
-
-	flag.Usage = func() {
+	flagSet.Usage = func() {
 		fmt.Println(`Tendermint blockchain benchmarking tool.
 
 Usage:
@@ -48,13 +48,12 @@ Usage:
 Examples:
 	tm-bench localhost:26657`)
 		fmt.Println("Flags:")
-		flag.PrintDefaults()
+		flagSet.PrintDefaults()
 	}
+	flagSet.Parse(os.Args[1:])
 
-	flag.Parse()
-
-	if flag.NArg() == 0 {
-		flag.Usage()
+	if flagSet.NArg() == 0 {
+		flagSet.Usage()
 		os.Exit(1)
 	}
 
@@ -88,7 +87,7 @@ Examples:
 	}
 
 	var (
-		endpoints     = strings.Split(flag.Arg(0), ",")
+		endpoints     = strings.Split(flagSet.Arg(0), ",")
 		client        = tmrpc.NewHTTP(endpoints[0], "/websocket")
 		initialHeight = latestBlockHeight(client)
 	)
@@ -229,7 +228,8 @@ func calculateStatistics(
 		stats.BlocksThroughput.Update(n)
 	}
 
-	for _, n := range numTxsPerSec {
+	for i, n := range numTxsPerSec {
+		logger.Debug(fmt.Sprintf("%d txs in second %d", n, i))
 		stats.TxsThroughput.Update(n)
 	}
 
