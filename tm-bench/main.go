@@ -193,6 +193,15 @@ func calculateStatistics(
 		offset = len(blockMetas)
 	}
 
+	// Ignore the first block created if there were no txs in it, since we likely didn't begin
+	// sending txs by then.
+	if blockMetas[len(blockMetas)-1].Header.NumTxs == 0 {
+		if timeStart.Before(blockMetas[len(blockMetas)-1].Header.Time) {
+			timeStart = blockMetas[len(blockMetas)-1].Header.Time
+		}
+		blockMetas = blockMetas[:len(blockMetas)-1]
+	}
+
 	var (
 		numBlocksPerSec = make(map[int64]int64)
 		numTxsPerSec    = make(map[int64]int64)
@@ -205,7 +214,7 @@ func calculateStatistics(
 	}
 
 	// iterates from max height to min height
-	for _, blockMeta := range blockMetas {
+	for i, blockMeta := range blockMetas {
 		// check if block was created after timeStart
 		if blockMeta.Header.Time.Before(timeStart) {
 			break
@@ -222,14 +231,14 @@ func calculateStatistics(
 
 		// increase number of txs for that second
 		numTxsPerSec[sec] += blockMeta.Header.NumTxs
+		logger.Debug(fmt.Sprintf("%d txs in block %d, height %d", blockMeta.Header.NumTxs, i, blockMeta.Header.Height))
 	}
 
 	for _, n := range numBlocksPerSec {
 		stats.BlocksThroughput.Update(n)
 	}
 
-	for i, n := range numTxsPerSec {
-		logger.Debug(fmt.Sprintf("%d txs in second %d", n, i))
+	for _, n := range numTxsPerSec {
 		stats.TxsThroughput.Update(n)
 	}
 
